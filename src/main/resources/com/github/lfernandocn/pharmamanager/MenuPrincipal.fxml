@@ -5,7 +5,7 @@
 <BorderPane style="-fx-background-color: #8193a3;"
             xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.pharmamanager.controller.MenuController">
+            fx:controller="com.github.lfernandocn.pharmamanager.controllers.MenuController">
 
     <top>
         <MenuBar>
