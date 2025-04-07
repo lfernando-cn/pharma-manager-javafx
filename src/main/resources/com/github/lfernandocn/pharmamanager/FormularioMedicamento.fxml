@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane style="-fx-background-color: #8193a3;"
+            xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.pharmamanager.controller.MedicamentoFormController">
+
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background: #8193a3; -fx-background-color: #8193a3;">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <VBox spacing="20" maxWidth="600" alignment="TOP_LEFT">
+
+                <Label text="📝 Cadastro de Medicamento" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+                <VBox spacing="10">
+                    <Label text="📦 Dados do Medicamento" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                    <GridPane hgap="10" vgap="12">
+                        <Label text="Código:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtCodigo" promptText="Ex: 1234567" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <Label text="Nome:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtNome" promptText="Nome do medicamento" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <Label text="Descrição:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtDescricao" promptText="Descrição breve" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                        <Label text="Princípio Ativo:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtPrincipioAtivo" promptText="Componente principal" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                        <Label text="Validade:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                        <DatePicker fx:id="dpValidade" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                        <Label text="Quantidade:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtEstoque" promptText="Ex: 100" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+                        <Label text="Preço:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtPreco" promptText="R$ 0,00" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+                        <Label text="Controlado:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                        <CheckBox fx:id="chkControlado" text="Sim" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+                        <Label text="Fornecedor:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="cbxFornecedor" promptText="Selecione..." GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+                    </GridPane>
+                </VBox>
+
+                <HBox alignment="CENTER_RIGHT" spacing="10">
+                    <Button text="💾 Salvar Medicamento" onAction="#salvar" style="-fx-font-weight: bold;"/>
+                </HBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>
