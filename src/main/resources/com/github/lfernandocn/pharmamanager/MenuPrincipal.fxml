@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane style="-fx-background-color: #8193a3;"
+            xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.pharmamanager.controller.MenuController">
+
+    <top>
+        <MenuBar>
+            <Menu text="📂 Navegação">
+                <MenuItem text="➕ Cadastro de Medicamentos" onAction="#abrirFormulario"/>
+                <MenuItem text="➕ Cadastro de Fornecedores" onAction="#abrirFormularioFornecedor"/>
+                <MenuItem text="📋 Lista de Medicamentos" onAction="#abrirLista"/>
+                <MenuItem text="📊 Relatórios" onAction="#abrirRelatorio"/>
+            </Menu>
+        </MenuBar>
+    </top>
+
+    <center>
+        <StackPane fx:id="conteudoCentral" style="-fx-background-color: #8193a3;">
+            <Label text="Bem-vindo ao PharmaManager" style="-fx-font-size: 24px; -fx-text-fill: white;"/>
+        </StackPane>
+    </center>
+</BorderPane>
