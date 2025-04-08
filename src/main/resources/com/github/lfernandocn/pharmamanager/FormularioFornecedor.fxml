@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.github.lfernandocn.pharmamanager.controllers.FornecedorFormController">
+
+    <center>
+        <VBox fx:id="containerPrincipal" spacing="12" alignment="TOP_LEFT" maxWidth="600">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <Label text="🏷️ Cadastro de Fornecedor"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+            <GridPane hgap="10" vgap="10">
+                <Label text="CNPJ:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtCnpj" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="Razão Social:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtRazaoSocial" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <Label text="Telefone:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtTelefone" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                <Label text="Email:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtEmail" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                <Label text="Cidade:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtCidade" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                <Label text="Estado:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtEstado" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+            </GridPane>
+
+            <HBox alignment="CENTER_RIGHT" spacing="10">
+                <Button text="💾 Salvar" onAction="#salvarFornecedor" style="-fx-font-weight: bold;"/>
+                <Button text="✏️ Editar" onAction="#editarFornecedor"/>
+                <Button text="🗑️ Remover" onAction="#removerFornecedor"/>
+            </HBox>
+
+            <Label fx:id="lblMensagem" textFill="green"/>
+
+            <TableView fx:id="tabelaFornecedores" prefHeight="200">
+                <columns>
+                    <TableColumn text="CNPJ" fx:id="colCnpj"/>
+                    <TableColumn text="Razão Social" fx:id="colRazao"/>
+                    <TableColumn text="Telefone" fx:id="colTelefone"/>
+                    <TableColumn text="Email" fx:id="colEmail"/>
+                    <TableColumn text="Cidade" fx:id="colCidade"/>
+                    <TableColumn text="Estado" fx:id="colEstado"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>
