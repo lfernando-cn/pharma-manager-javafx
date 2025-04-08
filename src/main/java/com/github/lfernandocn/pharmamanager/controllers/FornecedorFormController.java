@@ -31,6 +31,8 @@ public class FornecedorFormController {
     private ObservableList<Fornecedor> lista = FXCollections.observableArrayList();
 
     private Fornecedor fornecedorSelecionado = null;
+    private boolean modoEdicao = false;
+
     @FXML private VBox containerPrincipal;
 
     @FXML
@@ -45,16 +47,17 @@ public class FornecedorFormController {
         tabelaFornecedores.setItems(lista);
         lista.addAll(FornecedorRepository.buscarTodos());
 
+        bloquearCampos(true);
+
         tabelaFornecedores.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             fornecedorSelecionado = newVal;
-            if (newVal != null) {
+            if (!modoEdicao && newVal != null) {
                 preencherCampos(newVal);
             }
         });
 
         containerPrincipal.setOnMousePressed(event -> {
-            // Só limpa se estiver editando e o clique não for na tabela
-            if (emModoEdicao() && !tabelaFornecedores.isHover()) {
+            if (!emModoEdicao() && !tabelaFornecedores.isHover()) {
                 limparCampos();
             }
         });
@@ -64,27 +67,8 @@ public class FornecedorFormController {
     protected void salvarFornecedor(ActionEvent event) {
         if (!validarCampos()) return;
 
-        Fornecedor fornecedor = new Fornecedor(
-                txtCnpj.getText(),
-                txtRazaoSocial.getText(),
-                txtTelefone.getText(),
-                txtEmail.getText(),
-                txtCidade.getText(),
-                txtEstado.getText()
-        );
-
-        FornecedorRepository.salvar(fornecedor);
-        lista.setAll(FornecedorRepository.buscarTodos());
-
-        lblMensagem.setText("✅ Fornecedor salvo com sucesso!");
-        limparCampos();
-    }
-
-    @FXML
-    protected void editarFornecedor() {
-        if (fornecedorSelecionado != null) {
-            if (!validarCampos()) return;
-
+        if (modoEdicao && fornecedorSelecionado != null) {
+            // Atualização
             fornecedorSelecionado.setCnpj(txtCnpj.getText());
             fornecedorSelecionado.setRazaoSocial(txtRazaoSocial.getText());
             fornecedorSelecionado.setTelefone(txtTelefone.getText());
@@ -94,45 +78,85 @@ public class FornecedorFormController {
 
             FornecedorRepository.salvarTodos(lista);
             lblMensagem.setText("✏️ Fornecedor editado!");
-            lista.setAll(FornecedorRepository.buscarTodos());
-            limparCampos();
+        } else {
+            // Novo
+            Fornecedor fornecedor = new Fornecedor(
+                    txtCnpj.getText(),
+                    txtRazaoSocial.getText(),
+                    txtTelefone.getText(),
+                    txtEmail.getText(),
+                    txtCidade.getText(),
+                    txtEstado.getText()
+            );
+            FornecedorRepository.salvar(fornecedor);
+            lblMensagem.setText("✅ Fornecedor salvo com sucesso!");
+        }
+
+        lista.setAll(FornecedorRepository.buscarTodos());
+        limparCampos();
+        bloquearCampos(true);
+        modoEdicao = false;
+    }
+
+    @FXML
+    protected void editarFornecedor() {
+        if (fornecedorSelecionado != null) {
+            preencherCampos(fornecedorSelecionado);
+            bloquearCampos(false);
+            modoEdicao = true;
         }
     }
 
     @FXML
     protected void removerFornecedor() {
         if (fornecedorSelecionado != null) {
-            lista.remove(fornecedorSelecionado);
-            FornecedorRepository.salvarTodos(lista);
-            lblMensagem.setText("🗑️ Fornecedor removido!");
-            limparCampos();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmar Remocao");
+            alert.setHeaderText("Deseja realmente remover este fornecedor?");
+            alert.setContentText("Fornecedor: " + fornecedorSelecionado.getRazaoSocial() +
+                    "\nCNPJ: " + fornecedorSelecionado.getCnpj());
+
+            ButtonType btnSim = new ButtonType("Sim");
+            ButtonType btnNao = new ButtonType("Nao", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            alert.getButtonTypes().setAll(btnSim, btnNao);
+
+            alert.showAndWait().ifPresent(resposta -> {
+                if (resposta == btnSim) {
+                    lista.remove(fornecedorSelecionado);
+                    FornecedorRepository.salvarTodos(lista);
+                    lblMensagem.setText("🗑️ Fornecedor removido!");
+                    limparCampos();
+                }
+            });
         }
     }
+
 
     private boolean validarCampos() {
         StringBuilder erros = new StringBuilder();
 
         if (txtCnpj.getText().isBlank()) {
-            erros.append("CNPJ é obrigatório.\n");
+            erros.append("CNPJ é obrigatorio.\n");
         } else if (!CNPJValidador.isValid(txtCnpj.getText())) {
-            erros.append("CNPJ inválido.\n");
+            erros.append("CNPJ invalido.\n");
         }
 
-        if (txtRazaoSocial.getText().isBlank()) erros.append("Razão Social é obrigatória.\n");
-        if (txtTelefone.getText().isBlank()) erros.append("Telefone é obrigatório.\n");
+        if (txtRazaoSocial.getText().isBlank()) erros.append("Razao Social é obrigatoria.\n");
+        if (txtTelefone.getText().isBlank()) erros.append("Telefone é obrigatorio.\n");
 
         if (txtEmail.getText().isBlank()) {
-            erros.append("Email é obrigatório.\n");
+            erros.append("Email é obrigatorio.\n");
         } else if (!txtEmail.getText().matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
-            erros.append("Email inválido.\n");
+            erros.append("Email invalido.\n");
         }
 
-        if (txtCidade.getText().isBlank()) erros.append("Cidade é obrigatória.\n");
-        if (txtEstado.getText().isBlank()) erros.append("Estado é obrigatório.\n");
+        if (txtCidade.getText().isBlank()) erros.append("Cidade é obrigatoria.\n");
+        if (txtEstado.getText().isBlank()) erros.append("Estado é obrigatorio.\n");
 
         if (erros.length() > 0) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erro de Validação");
+            alert.setTitle("Erro de Validacao");
             alert.setHeaderText("Corrija os seguintes erros:");
             alert.setContentText(erros.toString());
             alert.showAndWait();
@@ -160,9 +184,20 @@ public class FornecedorFormController {
         txtEstado.clear();
         tabelaFornecedores.getSelectionModel().clearSelection();
         fornecedorSelecionado = null;
+        modoEdicao = false;
+        bloquearCampos(true);
+    }
+
+    private void bloquearCampos(boolean bloquear) {
+        txtCnpj.setDisable(bloquear);
+        txtRazaoSocial.setDisable(bloquear);
+        txtTelefone.setDisable(bloquear);
+        txtEmail.setDisable(bloquear);
+        txtCidade.setDisable(bloquear);
+        txtEstado.setDisable(bloquear);
     }
 
     private boolean emModoEdicao() {
-        return fornecedorSelecionado != null;
+        return modoEdicao;
     }
 }
