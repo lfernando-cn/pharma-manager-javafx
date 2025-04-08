@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -21,15 +22,16 @@ public class RelatorioController {
     @FXML
     public void vencendoEm30Dias() {
         LocalDate hoje = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         List<String> resultado = repository.listarTodos().stream()
                 .filter(m -> !m.getDataValidade().isBefore(hoje) && m.getDataValidade().isBefore(hoje.plusDays(30)))
                 .sorted(Comparator.comparing(Medicamento::getDataValidade))
-                .map(m -> m.getNome() + " vence em " + m.getDataValidade())
+                .map(m -> m.getNome() + " vence em " + m.getDataValidade().format(formatter))
                 .collect(Collectors.toList());
 
         listRelatorio.setItems(FXCollections.observableArrayList(resultado));
     }
-
     @FXML
     public void estoqueBaixo() {
         List<String> resultado = repository.listarTodos().stream()
