@@ -121,7 +121,7 @@ public class ListMedicamentoController {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/pharmamanager/MedicamentoEditForm.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/github/lfernandocn/pharmamanager/MedicamentoEditForm.fxml"));
 
             Parent root = loader.load();
 
