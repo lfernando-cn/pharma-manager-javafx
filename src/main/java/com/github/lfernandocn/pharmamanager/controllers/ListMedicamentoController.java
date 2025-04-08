@@ -29,13 +29,12 @@ public class ListMedicamentoController {
     @FXML private TableColumn<Medicamento, String> colFornecedor;
     @FXML private TableColumn<Medicamento, Integer> colQuantidade;
 
-    @FXML private VBox containerPrincipal; // ← Adicionado para detectar cliques fora da tabela
+    @FXML private VBox containerPrincipal;
 
     private final MedicamentoRepository repository = new MedicamentoRepository();
 
     @FXML
     public void initialize() {
-        // Associa as colunas às propriedades do modelo
         colCodigo.setCellValueFactory(cellData -> cellData.getValue().codigoProperty());
         colNome.setCellValueFactory(cellData -> cellData.getValue().nomeProperty());
         colPrincipioAtivo.setCellValueFactory(cellData -> cellData.getValue().principioAtivoProperty());
@@ -47,7 +46,6 @@ public class ListMedicamentoController {
 
         atualizarLista();
 
-        // → Desmarca a seleção se clicar fora da tabela
         containerPrincipal.setOnMousePressed(event -> {
             if (!tableMedicamentos.isHover()) {
                 tableMedicamentos.getSelectionModel().clearSelection();
@@ -70,13 +68,13 @@ public class ListMedicamentoController {
 
         repository.buscarPorCodigo(codigo).ifPresentOrElse(
                 m -> {
-                    atualizarLista(); // Garante a lista completa
+                    atualizarLista();
 
                     for (int i = 0; i < tableMedicamentos.getItems().size(); i++) {
                         Medicamento med = tableMedicamentos.getItems().get(i);
                         if (med.getCodigo().equals(m.getCodigo())) {
-                            tableMedicamentos.getSelectionModel().select(i); // Marca como selecionado
-                            tableMedicamentos.scrollTo(i); // Rola até o item
+                            tableMedicamentos.getSelectionModel().select(i);
+                            tableMedicamentos.scrollTo(i);
                             tableMedicamentos.requestFocus();
                             break;
                         }
