@@ -11,19 +11,19 @@ public class MenuController {
     private StackPane conteudoCentral;
 
     public void abrirFormulario() {
-        carregarTela("/com/example/pharmamanager/FormularioMedicamento.fxml");
+        carregarTela("/com/github/lfernandocn/pharmamanager/FormularioMedicamento.fxml");
     }
 
     public void abrirLista() {
-        carregarTela("/com/example/pharmamanager/ListaMedicamentos.fxml");
+        carregarTela("/com/github/lfernandocn/pharmamanager/ListaMedicamentos.fxml");
     }
 
     public void abrirRelatorio() {
-        carregarTela("/com/example/pharmamanager/Relatorio.fxml");
+        carregarTela("/com/github/lfernandocn/pharmamanager/Relatorio.fxml");
     }
 
     public void abrirFormularioFornecedor(){
-        carregarTela("/com/example/pharmamanager/FormularioFornecedor.fxml");
+        carregarTela("/com/github/lfernandocn/pharmamanager/FormularioFornecedor.fxml");
     }
 
     private void carregarTela(String caminhoFXML) {
