@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.github.lfernandocn.pharmamanager.controllers.RelatorioController">
+
+    <left>
+        <VBox spacing="12">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Relatórios" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+            <Separator />
+            <Button text="📅 Vencendo em 30 dias" maxWidth="Infinity" onAction="#vencendoEm30Dias"/>
+            <Button text="📉 Estoque baixo (&lt;5)" maxWidth="Infinity" onAction="#estoqueBaixo"/>
+            <Button text="💊 Controlados / Não Controlados" maxWidth="Infinity" onAction="#controlados"/>
+            <Button text="🏷️ Total por Fornecedor" maxWidth="Infinity" onAction="#valorTotalPorFornecedor"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Resultados" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <ListView fx:id="listRelatorio" VBox.vgrow="ALWAYS"/>
+        </VBox>
+    </center>
+</BorderPane>
