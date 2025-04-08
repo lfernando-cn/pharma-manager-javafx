@@ -32,9 +32,9 @@
                     <TableColumn fx:id="colCodigo" text="Código" prefWidth="100"/>
                     <TableColumn fx:id="colNome" text="Nome" prefWidth="150"/>
                     <TableColumn fx:id="colPrincipioAtivo" text="Princípio Ativo" prefWidth="150"/>
-                    <TableColumn fx:id="colDescricao" text="Descrição" prefWidth="200"/>
                     <TableColumn fx:id="colFornecedor" text="Fornecedor" prefWidth="150"/>
                     <TableColumn fx:id="colQuantidade" text="Quantidade" prefWidth="100"/>
+                    <TableColumn fx:id="colDescricao" text="Descrição" prefWidth="200"/>
                 </columns>
             </TableView>
         </VBox>
