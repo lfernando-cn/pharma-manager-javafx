@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.github.lfernandocn.pharmamanager.controllers.ListMedicamentoController">
+
+    <top>
+        <VBox spacing="8">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="🔎 Consulta de Medicamentos" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <HBox spacing="10">
+                <TextField fx:id="txtCodigoBusca" promptText="Digite o código do medicamento..." HBox.hgrow="ALWAYS"/>
+                <Button text="Buscar" onAction="#buscar"/>
+                <Button text="🗑️ Excluir Selecionado" onAction="#excluirSelecionado"/>
+                <Button text="✏️ Editar Selecionado" onAction="#editarSelecionado"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox fx:id="containerPrincipal" spacing="10">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="Lista de Medicamentos" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <TableView fx:id="tableMedicamentos" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colCodigo" text="Código" prefWidth="100"/>
+                    <TableColumn fx:id="colNome" text="Nome" prefWidth="150"/>
+                    <TableColumn fx:id="colPrincipioAtivo" text="Princípio Ativo" prefWidth="150"/>
+                    <TableColumn fx:id="colDescricao" text="Descrição" prefWidth="200"/>
+                    <TableColumn fx:id="colFornecedor" text="Fornecedor" prefWidth="150"/>
+                    <TableColumn fx:id="colQuantidade" text="Quantidade" prefWidth="100"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>

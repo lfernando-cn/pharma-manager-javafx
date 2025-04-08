@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<GridPane fx:controller="com.github.lfernandocn.pharmamanager.controllers.MedicamentoFormController"
+          xmlns:fx="http://javafx.com/fxml"
+          hgap="10" vgap="10">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Código:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <TextField fx:id="txtCodigo" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+    <Label text="Nome:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <TextField fx:id="txtNome" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+    <Label text="Descrição:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <TextField fx:id="txtDescricao" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+    <Label text="Princípio Ativo:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <TextField fx:id="txtPrincipioAtivo" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+    <Label text="Validade:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <DatePicker fx:id="dpValidade" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+    <Label text="Estoque:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+    <TextField fx:id="txtEstoque" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+    <Label text="Preço:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+    <TextField fx:id="txtPreco" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+    <Label text="Fornecedor:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+    <ComboBox fx:id="cbxFornecedor" promptText="Selecione um fornecedor" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+    <CheckBox text="Controlado" fx:id="chkControlado" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+
+    <Button text="Salvar" onAction="#salvar" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+</GridPane>
