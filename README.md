@@ -1,7 +1,7 @@
 
 # PharmaManager
 
-**PharmaManager** é um sistema desktop desenvolvido em **Java** com **JavaFX**, voltado para o gerenciamento de medicamentos e fornecedores em uma farmácia. O sistema permite cadastro, edição, exclusão, listagem, geração de relatórios e exportação de dados em CSV.
+**PharmaManager** é um sistema desktop desenvolvido em **Java** com **JavaFX**, criado com fins acadêmicos, voltado para o gerenciamento de medicamentos e fornecedores em uma farmácia. O sistema permite cadastro, edição, exclusão, listagem, geração de relatórios e exportação de dados em CSV.
 
 ## Funcionalidades
 
